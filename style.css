@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto&display=swap');
+
+:root {
+    --primary-black: #2D2D2D;
+    --yellow: #FAD752;
+    --secondary-black: #515151;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--primary-black);
+    font-family: 'Roboto', sans-serif;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 1200px;
+    margin: 100px auto;
+}
+
+.line-title {
+    color: var(--yellow);
+    letter-spacing: 0.5px;
+    font-size: 44px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.details span {
+    font-size: 27px;
+    font-weight: bold;
+    color: var(--yellow);
+}
+
+.details #newGame {
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--secondary-black);
+    border: none;
+    color: #fff;
+}
+
+.details #newGame:hover {
+    background-color: #414141;
+}
+
+.details #newGame:active {
+    background-color: #3a3a3a;
+}
+
+.typing {
+    max-width: 1200px;
+}
+
+.typing {
+    position: relative;
+}
+
+.text-content {
+    width: 95%;
+    max-width: 1200px;
+    word-spacing: 10px;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 50px;
+    color: var(--secondary-black);
+}
+
+.typed-content {
+    position: absolute;
+    top: 0;
+    width: 95%;
+    max-width: 1200px;
+    word-spacing: 10px;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 50px;
+    color: #fff;
+}
