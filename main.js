@@ -1,24 +1,21 @@
-const typedContent = document.querySelector(".typed-content");
-let textContent = document.querySelector(".text-content ").textContent;
+let textContent = document.getElementById("text-content");
+let newArray = [];
+let validChars = /[qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,./;'"]/;
+let currentWord = 0;
+let currentChar = 0;
 
-let textArray = textContent.split(" ");
-
-function insertChar(val) {
-    typedContent.textContent += val;
+async function setWords() {
+    const reponse = await fetch(`https://random-word-api.herokuapp.com/word?number=35&&lang=en&&length=5`);
+    const wordList = await reponse.json();
+    
+    console.log(wordList);
+    for (let i = 0; i < wordList.length; i++) {
+        // for (let j = 0; wordList[i].length; j++) {
+        //     textContent.innerHTML += `<span>${wordList[i][j]}</span>`;
+        // }
+        textContent.innerHTML += `<span>${wordList[i]}</span>`;
+        textContent.innerHTML += `<span> </span>`;
+    }
 }
 
-function removeChar() {
-    typedContent.textContent = typedContent.textContent.slice(0, -1);
-}
-
-document.body.addEventListener('keypress', ev => {
-    if (ev.key != "Enter") {
-        insertChar(ev.key);
-    }
-});
-
-document.body.addEventListener('keydown', ev => {
-    if (ev.key == 'Backspace') {
-        removeChar();
-    }
-})
+setWords();
