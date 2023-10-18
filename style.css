@@ -80,4 +80,13 @@ body {
 
 .redChar {
     color: red;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.whiteChar {
+    color: white;
+}
+
+.defaultChar {
+    color: var(--secondary-black);
 }
