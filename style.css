@@ -78,6 +78,10 @@ body {
     color: var(--secondary-black);
 }
 
+#text-content span {
+    position: relative;
+}
+
 .redChar {
     color: red;
     background-color: rgba(255, 0, 0, 0.2);
@@ -89,4 +93,27 @@ body {
 
 .defaultChar {
     color: var(--secondary-black);
+}
+
+#cursor {
+    width: 2px;
+    height: 1.7rem;
+    background-color: var(--yellow);
+    animation: blink .4s infinite;
+    display: inline-block;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
