@@ -62,11 +62,8 @@ body {
 }
 
 .typing {
-    max-width: 1200px;
-}
-
-.typing {
     position: relative;
+    max-width: 1200px;
 }
 
 #text-content {
@@ -76,6 +73,19 @@ body {
     font-weight: 900;
     line-height: 50px;
     color: var(--secondary-black);
+}
+
+#pre-type, #result {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    transform: scale(1.05);
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    background-color: rgba(45, 45, 45, 0.4);
+    backdrop-filter: blur(5px);
 }
 
 #text-content span {
@@ -117,3 +127,4 @@ body {
         opacity: 1;
     }
 }
+

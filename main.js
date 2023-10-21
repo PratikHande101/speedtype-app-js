@@ -1,27 +1,12 @@
 let textContent = document.getElementById("text-content");
 let typingSection = document.getElementById("text-content").parentElement;
 let validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyxz0123456789!@#$%^&*()_+=-{}[]:";,./<>?';
-let currentChar = 0;
 let elementArray = [];
 
+const numberOfWordsToSelect = 50;
+const timer = document.getElementById("timer");
 const cursor = document.createElement('div');
 cursor.setAttribute('id', 'cursor');
-
-async function setWords() {
-    if (!elementArray.length) {
-        typingSection.insertBefore(cursor, textContent);
-        cursor.style.top = "10px";
-    }
-
-    const reponse = await fetch(`https://random-word-api.herokuapp.com/word?number=40&&lang=en`);
-    const wordList = await reponse.json();
-    for (let i = 0; i < wordList.length; i++) {
-        for (let j = 0; j < wordList[i].length; j++) {
-            textContent.innerHTML += `<span>${wordList[i][j]}</span>`;
-        }
-        textContent.innerHTML += `<span> </span>`;
-    }
-}
 
 window.setInterval(() => {
     if (!elementArray.length) {
@@ -31,14 +16,58 @@ window.setInterval(() => {
 }, 450);
 
 
+function getRandomWords(array, num) {
+    const shuffled = array.slice();
+    let selectedWords = [];
+    let currentIndex = array.length;
+
+    while (currentIndex > 0 && selectedWords.length < num) {
+        const randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [shuffled[currentIndex], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[currentIndex]]
+    }
+
+    selectedWords = shuffled.slice(0, num);
+
+    return selectedWords;
+}
+
+function setWords() {
+    if (elementArray.length == 0) {
+        typingSection.insertBefore(cursor, textContent);
+        cursor.style.top = "10px";
+    }
+
+    //const reponse = await fetch(`https://random-word-api.herokuapp.com/word?number=40&&lang=en`);
+    const wordList = getRandomWords(wordArray, numberOfWordsToSelect);
+    for (let i = 0; i < wordList.length; i++) {
+        for (let j = 0; j < wordList[i].length; j++) {
+            textContent.innerHTML += `<span>${wordList[i][j]}</span>`;
+        }
+        textContent.innerHTML += `<span> </span>`;
+    }
+}
+
 document.body.addEventListener("keydown", ev => {
 
     if (typingSection.children[0].id === "cursor" && elementArray.length < 1) {
         typingSection.removeChild(typingSection.children[0]);
         console.log(typingSection.children[0]);
     }
+ 
+    console.log(textContent.children.length);
+    console.log(elementArray.length);
 
-    console.log("Pressed: " + ev.key + ", Required: " + textContent.children[elementArray.length].textContent); // determine the pressed key and required key
+    if (elementArray.length == (textContent.children.length - 1)) {
+        elementArray = [];
+        textContent.innerHTML = "";
+
+        setWords();
+        return;
+    }
+
+    //console.log("Pressed: " + ev.key + ", Required: " + textContent.children[elementArray.length].textContent); // determine the pressed key and required key
 
     if (ev.key == "Backspace") { // if entered key is backspace and there are elements in element array...
 
@@ -86,5 +115,9 @@ document.body.addEventListener("keydown", ev => {
         charEle.innerHTML += `<div id="cursor"></div>`;
     }
 })
+
+// window.setInterval(() => {
+//     timer.textContent = timer.textContent - 1;
+// }, 1000);
 
 setWords();
